@@ -2,7 +2,6 @@ package example.hibernate.run;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,11 +24,6 @@ public class NamedQueriesExample {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) throws ParseException {
-
-        System.out.println("Let's create few users and persist them...");
-        for (User user : generateNonPersistedUsers()) {
-            saveUser(user);
-        }
 
         System.out.println("Let's find all users with email %n@email.com...");
         for (User user: findByEmail("%n@email.com")) {
@@ -55,27 +48,6 @@ public class NamedQueriesExample {
         sessionFactory.close();
 
     }
-
-    private static void saveUser(User user) {
-        Session session = null;
-        Transaction tx = null;
-        try {
-            logger.debug("Saving user: {}", user);
-            session = sessionFactory.openSession();
-            tx = session.beginTransaction();
-            session.save(user);
-            tx.commit();
-            logger.debug("Saved user: {}", user);
-        } catch (HibernateException e) {
-            logger.warn("Could not persist user due to: " + e.getMessage());
-            e.printStackTrace();
-            if (tx != null && tx.isActive()) tx.rollback();
-        } finally {
-            if (session != null && session.isOpen())
-                session.close();
-        }
-    }
-
 
     @SuppressWarnings("unchecked")
     private static List<User> findByEmail(String email) {
@@ -128,19 +100,6 @@ public class NamedQueriesExample {
         } finally {
             if (session != null && session.isOpen()) session.close();
         }
-    }
-
-    private static List<User> generateNonPersistedUsers() throws ParseException {
-        logger.debug("Generating non-persisted users.");
-        List<User> users = new ArrayList<>();
-        users.add(new User(null, "John Doe", "john@email.com", sdf.parse("2001-01-01"), true));
-        users.add(new User(null, "Jane Doe", "jane@email.com", sdf.parse("2002-01-01"), true));
-        users.add(new User(null, "Jack Doe", "jack@email.com", sdf.parse("2003-01-01"), false));
-        users.add(new User(null, "Jill Doe", "jill@email.com", sdf.parse("2004-01-01"), true));
-        users.add(new User(null, "Jenn Doe", "jenn@email.com", sdf.parse("2005-01-01"), false));
-        users.add(new User(null, "Jean Doe", "jean@email.com", sdf.parse("2010-01-01"), true));
-        users.add(new User(null, "Joni Doe", "joni@email.com", sdf.parse("2014-01-01"), true));
-        return users;
     }
 
 }
