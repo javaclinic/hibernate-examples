@@ -34,14 +34,19 @@ public class CrudOperationsExample {
         }
 
         System.out.println("Let's find a user (id=1) ...");
-        User user = findUser(1);
+        User firstUser = findUser(1);
 
         System.out.println("Let's update the status of the user (id=1) to 'inactive' ...");
-        user.setActive(false);
-        updateUser(user);
+        firstUser.setActive(false);
+        updateUser(firstUser);
 
         System.out.println("Let's remove the user (id=5) ...");
         deleteUser(5);
+
+        System.out.println("Let's list all the users again ...");
+        for (User user : listUsers()) {
+            System.out.println(user);
+        }
 
         sessionFactory.close();
 
@@ -62,8 +67,7 @@ public class CrudOperationsExample {
             e.printStackTrace();
             if (tx != null && tx.isActive()) tx.rollback();
         } finally {
-            if (session != null && session.isOpen())
-                session.close();
+            if (session != null && session.isOpen()) session.close();
         }
     }
 
@@ -82,8 +86,7 @@ public class CrudOperationsExample {
             e.printStackTrace();
             if (tx != null && tx.isActive()) tx.rollback();
         } finally {
-            if (session != null && session.isOpen())
-                session.close();
+            if (session != null && session.isOpen()) session.close();
         }
     }
 
@@ -137,21 +140,15 @@ public class CrudOperationsExample {
             e.printStackTrace();
             if (tx != null && tx.isActive()) tx.rollback();
         } finally {
-            if (session != null && session.isOpen())
-                session.close();
+            if (session != null && session.isOpen()) session.close();
         }
     }
 
     private static List<User> generateNonPersistedUsers() {
         logger.debug("Generating non-persisted users.");
         List<User> users = new ArrayList<>();
-        users.add(new User(null, "John Doe", "john@email.com", new Date(), true));
-        users.add(new User(null, "Jane Doe", "jane@email.com", new Date(), true));
-        users.add(new User(null, "Jack Doe", "jack@email.com", new Date(), false));
-        users.add(new User(null, "Jill Doe", "jill@email.com", new Date(), true));
-        users.add(new User(null, "Jenn Doe", "jenn@email.com", new Date(), false));
-        users.add(new User(null, "Jean Doe", "jean@email.com", new Date(), true));
-        users.add(new User(null, "Joni Doe", "joni@email.com", new Date(), true));
+        users.add(new User(null, "Judy Doe", "judy@email.com", new Date(), true));
+        users.add(new User(null, "Jada Doe", "jada@email.com", new Date(), false));
         return users;
     }
 
