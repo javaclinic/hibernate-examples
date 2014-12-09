@@ -1,5 +1,6 @@
 package example.hibernate.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,7 +13,9 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="hibernate_simple_user")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -5742670858090161566L;
 
     // PROPERTIES
     @Id
