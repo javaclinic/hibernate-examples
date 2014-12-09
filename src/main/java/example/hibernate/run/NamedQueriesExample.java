@@ -52,6 +52,8 @@ public class NamedQueriesExample {
             System.out.println(user);
         }
 
+        sessionFactory.close();
+
     }
 
     private static void saveUser(User user) {
