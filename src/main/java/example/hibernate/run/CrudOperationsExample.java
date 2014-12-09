@@ -43,6 +43,8 @@ public class CrudOperationsExample {
         System.out.println("Let's remove the user (id=5) ...");
         deleteUser(5);
 
+        sessionFactory.close();
+
     }
 
     private static void saveUser(User user) {
