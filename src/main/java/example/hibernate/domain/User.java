@@ -23,7 +23,7 @@ import org.hibernate.annotations.NamedQuery;
  *
  */
 @Entity
-@Table(name="hibernate_simple_user")
+@Table(name="hibernate_named_queries_user")
 
 @NamedQueries({
     @NamedQuery(name="findByEmail",query="from User u where u.email like :email",readOnly=true),
@@ -32,7 +32,7 @@ import org.hibernate.annotations.NamedQuery;
 })
 
 @NamedNativeQueries({
-    @NamedNativeQuery(name="findNewer",query="select * from hibernate_simple_user u where u.created > :since", resultClass=User.class,readOnly=true)
+    @NamedNativeQuery(name="findNewer",query="select * from hibernate_named_queries_user u where u.created > :since", resultClass=User.class,readOnly=true)
 })
 
 public class User implements Serializable {
