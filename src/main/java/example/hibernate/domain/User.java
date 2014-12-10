@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 @Table(name="hibernate_user_with_address")
 public class User implements Serializable {
 
+    private static final long serialVersionUID = -8109594158771121963L;
+
     // PROPERTIES
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
