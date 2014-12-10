@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="hibernate_simple_user")
+@Table(name="hibernate_user_with_address")
 public class User implements Serializable {
 
     // PROPERTIES
