@@ -1,4 +1,4 @@
-DELETE FROM hibernate_simple_user;
+DELETE FROM hibernate_optimistic_locking_user;
 
 INSERT INTO hibernate_optimistic_locking_user (id,name,email,created,active,version) VALUES (x'03ec320ee60a483b887ea6f1f5353db6','John Doe','john@email.com','2001-01-01 00:00:00.000',true,0);
 INSERT INTO hibernate_optimistic_locking_user (id,name,email,created,active,version) VALUES (x'a5932f5e72b148b591f16a9e25eacd52','Jane Doe','jane@email.com','2002-01-01 00:00:00.000',true,0);
