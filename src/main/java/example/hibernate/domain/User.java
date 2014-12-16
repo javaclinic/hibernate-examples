@@ -13,6 +13,7 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="hibernate_optimistic_locking_user")
@@ -23,6 +24,7 @@ public class User implements Serializable {
 
     // PROPERTIES
     @Id
+    @Type(type="uuid-char")
     private UUID id;
 
     private String name;
